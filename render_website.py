@@ -15,13 +15,20 @@ def on_reload():
     template = env.get_template('template.html')
     with open('books_info.json') as f:
         books_info = json.load(f)
-
     #books_data = list(chunked(books_info, 2))
     #rendered_page = template.render(chunked_books=books_data)
-
-
     os.makedirs("pages/", exist_ok=True)
     books_info = list(chunked(books_info, 10))
+    for i, chunked_books in enumerate(books_info, 1):
+        books_data = list(chunked(chunked_books, 2))
+        rendered_page = template.render(chunked_books=books_data)
+        filename = "index{}.html".format(i)
+        filepath = os.path.join("pages/", filename)
+        with open(filepath, 'w', encoding="utf8") as file:
+            file.write(rendered_page)
+
+
+    """
     for chunked_books in books_info:
         books_data = list(chunked(chunked_books, 2))
         rendered_page = template.render(chunked_books=books_data)
@@ -30,6 +37,7 @@ def on_reload():
             filepath = os.path.join("pages/", filename)
             with open(filepath, 'w', encoding="utf8") as file:
                 file.write(rendered_page)
+    """
 
 
 on_reload()
