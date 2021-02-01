@@ -94,3 +94,5 @@ media/
 books_info.json
 books/*
 images/*
+pages/*
+index.html
