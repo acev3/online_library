@@ -14,7 +14,7 @@ env = Environment(
 
 def on_reload():
     template = env.get_template('template.html')
-    with open('books_info.json') as f:
+    with open('media/books_info.json') as f:
         books_info = json.load(f)
     os.makedirs("pages/", exist_ok=True)
     books_info = list(chunked(books_info, 10))
