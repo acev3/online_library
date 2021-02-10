@@ -19,9 +19,9 @@ def on_reload():
     os.makedirs("pages/", exist_ok=True)
     books = list(chunked(books, 10))
     pages = len(books)
-    for i, chunked_books in enumerate(books, 1):
-        books_data = list(chunked(chunked_books, 2))
-        rendered_page = template.render(chunked_books=books_data, pages=pages, current_page=i)
+    for i, book in enumerate(books, 1):
+        chunked_books = list(chunked(books, 2))
+        rendered_page = template.render(chunked_books=chunked_books, pages=pages, current_page=i)
         filename = "index{}.html".format(i)
         filepath = os.path.join("pages/", filename)
         with open(filepath, 'w', encoding="utf8") as file:
