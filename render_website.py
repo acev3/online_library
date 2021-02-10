@@ -28,18 +28,6 @@ def on_reload():
             file.write(rendered_page)
 
 
-    """
-    for chunked_books in books_info:
-        books_data = list(chunked(chunked_books, 2))
-        rendered_page = template.render(chunked_books=books_data)
-        for i, books in enumerate(books_data, 1):
-            filename = "index{}.html".format(i)
-            filepath = os.path.join("pages/", filename)
-            with open(filepath, 'w', encoding="utf8") as file:
-                file.write(rendered_page)
-    """
-
-
 on_reload()
 server = Server()
 server.watch('template.html', on_reload)
