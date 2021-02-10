@@ -15,11 +15,11 @@ env = Environment(
 def on_reload():
     template = env.get_template('template.html')
     with open('media/books_info.json') as f:
-        books_info = json.load(f)
+        books = json.load(f)
     os.makedirs("pages/", exist_ok=True)
-    books_info = list(chunked(books_info, 10))
-    pages = len(books_info)
-    for i, chunked_books in enumerate(books_info, 1):
+    books = list(chunked(books, 10))
+    pages = len(books)
+    for i, chunked_books in enumerate(books, 1):
         books_data = list(chunked(chunked_books, 2))
         rendered_page = template.render(chunked_books=books_data, pages=pages, current_page=i)
         filename = "index{}.html".format(i)
