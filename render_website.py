@@ -20,7 +20,7 @@ def on_reload():
     books = list(chunked(books, 10))
     pages = len(books)
     for i, book in enumerate(books, 1):
-        chunked_books = list(chunked(books, 2))
+        chunked_books = list(chunked(book, 2))
         rendered_page = template.render(chunked_books=chunked_books, pages=pages, current_page=i)
         filename = "index{}.html".format(i)
         filepath = os.path.join("pages/", filename)
