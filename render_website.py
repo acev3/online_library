@@ -12,15 +12,15 @@ env = Environment(
     )
 
 
-def on_reload():
+def on_reload(number_books_per_page=10, number_books_per_row=2):
     template = env.get_template('template.html')
     with open('media/books_info.json') as f:
         books = json.load(f)
     os.makedirs("pages/", exist_ok=True)
-    chunked_books = list(chunked(books, 10))
+    chunked_books = list(chunked(books, number_books_per_page))
     pages = len(chunked_books)
     for i, book in enumerate(chunked_books, 1):
-        double_chunked_books = list(chunked(book, 2))
+        double_chunked_books = list(chunked(book, number_books_per_row))
         rendered_page = template.render(chunked_books=double_chunked_books, pages=pages, current_page=i)
         filename = "index{}.html".format(i)
         filepath = os.path.join("pages/", filename)
