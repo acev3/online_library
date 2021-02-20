@@ -19,8 +19,8 @@ def on_reload(number_books_per_page=10, number_books_per_row=2):
     os.makedirs("pages/", exist_ok=True)
     chunked_books = list(chunked(books, number_books_per_page))
     pages = len(chunked_books)
-    for i, book in enumerate(chunked_books, 1):
-        double_chunked_books = list(chunked(book, number_books_per_row))
+    for i, books_on_page in enumerate(chunked_books, 1):
+        double_chunked_books = list(chunked(books_on_page, number_books_per_row))
         rendered_page = template.render(chunked_books=double_chunked_books, pages=pages, current_page=i)
         filename = "index{}.html".format(i)
         filepath = os.path.join("pages/", filename)
